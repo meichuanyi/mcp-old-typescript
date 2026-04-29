@@ -1,443 +1,172 @@
-<div align="center">
+# IBM MCP
 
-# Taskade MCP Server
+A collection of Model Context Protocol (MCP) servers, MCP Clients and Developer Tools by IBM. Connect your IBM products to any AI Agent or AI application.
 
-**Connect [Taskade](https://www.taskade.com) to any AI assistant — Claude, Cursor, Windsurf, n8n, and more — via the [Model Context Protocol](https://modelcontextprotocol.io/).**
+## What is MCP?
 
-[![npm](https://img.shields.io/npm/v/@taskade/mcp-server?style=flat-square&color=FF2D60)](https://www.npmjs.com/package/@taskade/mcp-server)
-[![GitHub stars](https://img.shields.io/github/stars/taskade/mcp?style=flat-square)](https://github.com/taskade/mcp)
-[![License](https://img.shields.io/github/license/taskade/mcp?style=flat-square)](https://github.com/taskade/mcp/blob/main/LICENSE)
+MCP is an open-source protocol designed to enable AI models to securely interact with local and remote resources through standardized server implementations. This collection of IBM MCP services focuses on both production-ready and experimental MCP servers that enhance AI capabilities by providing file access, database connections, API integrations, and additional contextual services.
 
-**50+ tools** for workspaces, projects, tasks, AI agents, knowledge bases, templates, automations, media, and sharing — all from your AI client.
+## Available MCP Servers
 
-</div>
+#### ⚙️ Automation
 
-- [MCP Server](https://github.com/taskade/mcp/tree/main/packages/server) — Connect Taskade to Claude Desktop, Cursor, Windsurf, or any MCP client.
-- [OpenAPI Codegen](https://github.com/taskade/mcp/tree/main/packages/openapi-codegen) — Generate MCP tools from any OpenAPI spec — not just Taskade.
+| Server name | Description | Usage |
+|---|---|---|
+| [IBM MQ Server](https://github.com/ibm-messaging/mq-mcp-server) | Provides access to IBM MQ queue managers health checks, and to run any MQSC command against a specific queue manager. | *see link for instructions* |
+| [K* Planner](https://github.com/IBM/kstar/tree/main/mcp) | K* MCP Server provides a containerized deployment of Top-K and Top-Q planners from the KStar repository as Model Checking Problem (MCP) tools. | *see link for instructions* |
 
----
+#### 💼 Business Automation
 
-## Demo
+| Server name | Description | Usage |
+|---|---|---|
+| [IBM Business Automation Workflow MCP Server](https://github.com/ibmbpm/ibm-baw-mcp-server) | The IBM® Business Automation Workflow MCP Server is a local Model Control Protocol (MCP) server that supports integration of AI agents with IBM® Business Automation Workflow through the Model Context Protocol. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22ibm-baw-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2Fibmbpm%2Fibm-baw-mcp-server%22%2C%22ibm-baw-mcp-server%22%5D%2C%22env%22%3A%7B%22ENDPOINT%22%3A%22YOUR_WORKFLOW_ENDPOINT%22%2C%22USERID%22%3A%22YOUR_WORKFLOW_USERNAME%22%2C%22PASSWORD%22%3A%22YOUR_WORKFLOW_PASWORD%22%7D%7D) |
+| [IBM Core Content Services MCP Server](https://github.com/ibm-ecm/ibm-content-services-mcp-server) | Provides tools to interact with IBM FileNet Content Manager (FNCM) repositories, enabling document management, folder operations, search capabilities and more. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](vscode:mcp/install?%7B%22name%22%3A%22core-cs-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2Fibm-ecm%2Fibm-content-services-mcp-server%22%2C%22core-cs-mcp-server%22%5D%2C%22env%22%3A%7B%22SERVER_URL%22%3A%22https%3A%2F%2Fyour-graphql-server%2Fcontent-services-graphql%2Fgraphql%22%2C%22OBJECT_STORE%22%3A%22your_object_store%22%2C%22USERNAME%22%3A%22username%22%2C%22PASSWORD%22%3A%22password%22%7D%7D) |
+| [IBM Decision Intelligence MCP Server](https://github.com/DecisionsDev/decision-intelligence-mcp-server) | This MCP server provides tools to invoke decision services deployed by [IBM Decision Intelligence](https://www.ibm.com/products/decision-intelligence) or [IBM Automation Decision Services](https://www.ibm.com/products/automation-decision-services) | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22ibm-decision-intelligence-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22di-mcp-server%22%5D%2C%22env%22%3A%7B%22APIKEY%22%3A%22%3CAPIKEY%3E%22%2C%22URL%22%3A%22https%3A%2F%2F%3CTENANT_NAME%3E.decision-prod-us-south.decision.saas.ibm.com%2Fads%2Fruntime%2Fapi%2Fv1%22%7D%7D) |
+| [IBM ODM MCP Server](https://github.com/DecisionsDev/ibm-odm-decision-mcp-server) | An MCP Server enabling integration with IBM Decision Server Runtime to retrieve and invoke decision services. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22ibm-odm-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2FDecisionsDev%2Fdecision-mcp-server%22%2C%22decision-mcp-server%22%5D%7D) |
+| [IBM Process Mining](https://www.ibm.com/docs/en/process-mining/2.1.0?topic=menu-generating-mcp-rest-api-tokens) | Provides access to processes and Data Analyst features. | *see link for instructions* |
 
-MCP-powered Taskade agent running inside Claude Desktop by Anthropic:
+#### 🧠 Data & Analytics
 
-![Taskade MCP Demo — AI agent managing tasks and projects in Claude Desktop](https://github.com/user-attachments/assets/0cee987b-b0d4-4d10-bb7f-da49a080d731)
+| Server name | Description | Usage |
+|---|---|---|
+| [IBM OpenPages MCP Server](https://github.com/IBM/ibm-openpages-mcp-server) | A Model Context Protocol (MCP) server that enables AI agents to interact with IBM OpenPages GRC platform through a standardized interface. Supports both remote (HTTP) and local (stdio) modes for flexible deployment. | *see link for instructions* |
+| [DataStax Astra DB](https://github.com/datastax/astra-db-mcp) | An MCP server for Astra DB workloads. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22astra-db-mcp%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40datastax%2Fastra-db-mcp-server%22%5D%2C%22env%22%3A%7B%22ASTRA_DB_APPLICATION_TOKEN%22%3A%22your_astra_db_token%22%2C%22ASTRA_DB_API_ENDPOINT%22%3A%22your_astra_db_endpoint%22%7D%7D) |
+| [Docling MCP Server](https://github.com/docling-project/docling-mcp) | Turn unstructured data into structured data using Docling, with tools for document conversion, processing and generation. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22docling-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%3Ddocling-mcp%22%2C%22docling-mcp-server%22%5D%7D) |
+| [IBM watsonx.data MCP Server](https://github.com/IBM/ibm-watsonxdata-mcp-server) | Enables AI assistants to interact with IBM watsonx.data lakehouses using natural language. Provides tools for querying lakehouse data with SQL, exploring data catalogs and metadata, inspecting table schemas, and monitoring engines. | *see link for instructions* |
+| [IBM watsonx.data Document Library Retrieval MCP Server](https://github.com/IBM/ibm-watsonxdata-dl-retrieval-mcp-server) | Query document libraries from watsonx.data using conversational language and receive human-readable responses using local MCP server. | *see link for instructions* |
+| [IBM watsonx.data Document Library Retrieval MCP Server (Remote)](https://www.ibm.com/docs/en/watsonxdata/saas?topic=service-watsonxdata-remote-model-context-protocol-mcp-server) | Query document libraries from watsonx.data using conversational language and receive human-readable responses using remote MCP server hosted in IBM infrastructure. | *see link for instructions* |
+| [IBM watsonx.data intelligence MCP Server](https://github.com/IBM/data-intelligence-mcp-server) | MCP Server to interact with watsonx.data intelligence on-prem or on SaaS environment. | *see link for instructions* |
+| [IBM MDM MCP Server](https://github.com/IBM/mdm-mcp-server) | This MCP server enables AI assistants like Claude to interact with IBM MDM services(formarly known as IBM Match 360), allowing users to search records, retrieve data models, and manage master data through natural language conversations. The server acts as a bridge between AI assistants and IBM MDM, exposing enterprise data management capabilities through the Model Context Protocol. | *see link for instructions* |
 
-| Build Agents via MCP | Automate Workflows | Manage Projects |
-|:---:|:---:|:---:|
-| <img src="https://raw.githubusercontent.com/taskade/taskade/main/media/agents/agent-generator.gif" width="280" alt="Create AI agents from your IDE via Taskade MCP"> | <img src="https://raw.githubusercontent.com/taskade/taskade/main/media/automations/automation-flows.gif" width="280" alt="Automate workflows via Taskade MCP"> | <img src="https://raw.githubusercontent.com/taskade/taskade/main/media/genesis/create-app.gif" width="280" alt="Manage projects and apps via Taskade MCP"> |
-| Create, train, deploy AI agents from Claude/Cursor | Build multi-step automations across 100+ services | Full workspace management from your AI assistant |
-
----
-
-## Quick Start
-
-### 1. Get Your API Key
-
-Go to [Taskade Settings > API](https://www.taskade.com/settings/api) and create a Personal Access Token.
-
-### 2. Claude Desktop
-
-Add to your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "taskade": {
-      "command": "npx",
-      "args": ["-y", "@taskade/mcp-server"],
-      "env": {
-        "TASKADE_API_KEY": "your-api-key-here"
-      }
-    }
-  }
-}
-```
-
-### 3. Cursor
-
-Add to your Cursor MCP settings:
-
-```json
-{
-  "mcpServers": {
-    "taskade": {
-      "command": "npx",
-      "args": ["-y", "@taskade/mcp-server"],
-      "env": {
-        "TASKADE_API_KEY": "your-api-key-here"
-      }
-    }
-  }
-}
-```
-
-### 4. HTTP / SSE Mode (for n8n, custom clients)
-
-```bash
-TASKADE_API_KEY=your-api-key npx @taskade/mcp-server --http
-```
-
-The server starts at `http://localhost:3000` (configure with `PORT` env var). Connect via SSE at `http://localhost:3000/sse?access_token=your-api-key`.
-
----
-
-## Tools (50+)
-
-### Workspaces
-
-| Tool | Description |
-|------|-------------|
-| `workspacesGet` | List all workspaces |
-| `workspaceFoldersGet` | List folders in a workspace |
-| `workspaceCreateProject` | Create a project in a workspace |
-
-### Projects
-
-| Tool | Description |
-|------|-------------|
-| `projectGet` | Get project details |
-| `projectCreate` | Create a new project |
-| `projectCopy` | Copy a project to a folder |
-| `projectComplete` | Mark project as completed |
-| `projectRestore` | Restore a completed project |
-| `projectFromTemplate` | Create project from a template |
-| `projectMembersGet` | List project members |
-| `projectFieldsGet` | Get custom fields for a project |
-| `projectShareLinkGet` | Get the share link |
-| `projectShareLinkEnable` | Enable the share link |
-| `projectBlocksGet` | Get all blocks in a project |
-| `projectTasksGet` | Get all tasks in a project |
-
-### Tasks
-
-| Tool | Description |
-|------|-------------|
-| `taskGet` | Get task details |
-| `taskCreate` | Create one or more tasks |
-| `taskPut` | Update a task |
-| `taskDelete` | Delete a task |
-| `taskComplete` | Mark task as complete |
-| `taskUncomplete` | Mark task as incomplete |
-| `taskMove` | Move a task within a project |
-| `taskAssigneesGet` | Get task assignees |
-| `taskPutAssignees` | Assign users to a task |
-| `taskDeleteAssignees` | Remove assignees |
-| `taskGetDate` | Get task due date |
-| `taskPutDate` | Set task due date |
-| `taskDeleteDate` | Remove task due date |
-| `taskNoteGet` | Get task note |
-| `taskNotePut` | Update task note |
-| `taskNoteDelete` | Delete task note |
-| `taskFieldsValueGet` | Get all field values |
-| `taskFieldValueGet` | Get a specific field value |
-| `taskFieldValuePut` | Set a field value |
-| `taskFieldValueDelete` | Delete a field value |
-
-### AI Agents
-
-Create, manage, and publish autonomous AI agents with custom knowledge and tools.
-
-| Tool | Description |
-|------|-------------|
-| `folderAgentGenerate` | Generate an AI agent from a text prompt |
-| `folderCreateAgent` | Create an agent with custom configuration |
-| `folderAgentGet` | List agents in a folder |
-| `agentGet` | Get agent details |
-| `agentUpdate` | Update agent configuration |
-| `deleteAgent` | Delete an agent |
-| `agentPublicAccessEnable` | Publish agent publicly |
-| `agentPublicGet` | Get public agent details |
-| `agentPublicUpdate` | Update public agent settings |
-| `agentKnowledgeProjectCreate` | Add a project as agent knowledge |
-| `agentKnowledgeMediaCreate` | Add media as agent knowledge |
-| `agentKnowledgeProjectRemove` | Remove project from knowledge |
-| `agentKnowledgeMediaRemove` | Remove media from knowledge |
-| `agentConvosGet` | List agent conversations |
-| `agentConvoGet` | Get conversation details |
-| `publicAgentGet` | Get agent by public ID |
-
-### Templates
-
-| Tool | Description |
-|------|-------------|
-| `folderProjectTemplatesGet` | List available project templates |
-| `projectFromTemplate` | Create a project from a template |
-
-### Media
-
-| Tool | Description |
-|------|-------------|
-| `mediasGet` | List media files in a folder |
-| `mediaGet` | Get media details |
-| `mediaDelete` | Delete a media file |
-
-### Personal
-
-| Tool | Description |
-|------|-------------|
-| `meProjectsGet` | List all your projects |
-
----
-
-## Why Taskade MCP?
-
-Taskade MCP gives your AI assistant **full access to your workspace** — projects, tasks, agents, knowledge bases, templates, and automations. Instead of writing API code, describe what you need in natural language.
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                HOW TASKADE MCP WORKS                     │
-└──────────────────────────────────────────────────────────┘
-
-  You (in Claude/Cursor/Windsurf):
-  "Create a support agent trained on our docs project"
-                         ↓
-  ┌──────────────────────────────────┐
-  │     Taskade MCP Server           │
-  │     (50+ tools, 7 categories)    │
-  └──────────────────────────────────┘
-       ↓              ↓            ↓
-  folderCreateAgent  agentKnowledge  agentPublicAccess
-  (creates agent)    (attaches docs)  (publishes it)
-                         ↓
-  Result: Live AI chatbot trained on your data
-```
-
-| What You Say | What Happens |
-|-------------|-------------|
-| "Show me all overdue tasks" | Reads projects → filters tasks → formats report |
-| "Create a support agent trained on our docs" | Creates agent → attaches knowledge → publishes |
-| "Set up next week's sprint from our template" | Copies template → populates tasks → assigns team |
-| "Summarize yesterday's completed work" | Reads task history → generates standup summary |
-
-### Why MCP Instead of REST API?
-
-| | REST API | MCP Server |
-|-|----------|-----------|
-| **Setup** | Write HTTP client, handle auth, parse JSON | `npx @taskade/mcp-server` — one command |
-| **Interface** | Code against endpoints | Natural language — describe what you need |
-| **Chaining** | Manual orchestration | AI chains tools intelligently |
-| **Error handling** | Write error handling code | AI interprets errors and retries |
-
-### Why Taskade MCP Over Other MCP Servers?
-
-Taskade is the only MCP server that includes **AI agent management** (create, train, deploy agents), **knowledge base training** (attach docs, projects, media), and **OpenAPI codegen** (generate MCP tools from any API spec). 50+ tools across 7 categories.
-
----
-
-## Agent Recipes
-
-<details>
-<summary><b>Recipe 1: Daily Standup Summarizer</b></summary>
-<br>
-
-**Problem:** Team standup notes scattered across Slack, email, and docs.
-
-```
-You: "Check my Taskade workspace for yesterday's completed tasks,
-      summarize them as a standup update, then create today's
-      priority tasks based on what's still open."
-
-Claude uses:
-  1. meProjectsGet → find your active projects
-  2. projectTasksGet → pull tasks from each project
-  3. taskCreate → create today's priority tasks
-
-Result: A formatted standup summary + fresh task list in Taskade.
-```
-</details>
-
-<details>
-<summary><b>Recipe 2: Knowledge Base Agent Builder</b></summary>
-<br>
-
-**Problem:** You have docs scattered across files and need an AI agent trained on them.
-
-```
-You: "Create an AI support agent called 'Help Bot' in my
-      Customer Success folder, train it on our Documentation
-      project, and publish it publicly."
-
-Claude uses:
-  1. workspaceFoldersGet → find "Customer Success" folder
-  2. folderCreateAgent → create "Help Bot" with support instructions
-  3. agentKnowledgeProjectCreate → attach Documentation project
-  4. agentPublicAccessEnable → publish with shareable link
-
-Result: Live AI chatbot trained on your docs, ready to embed.
-```
-</details>
-
-<details>
-<summary><b>Recipe 3: Sprint Planning Automation</b></summary>
-<br>
-
-**Problem:** Creating sprint projects manually every two weeks.
-
-```
-You: "Create a new sprint project from our 'Sprint Template',
-      name it 'Sprint 2026-W15', move the top 10 backlog
-      items into it, and assign them to the engineering team."
-
-Claude uses:
-  1. folderProjectTemplatesGet → find "Sprint Template"
-  2. projectFromTemplate → create "Sprint 2026-W15"
-  3. projectTasksGet → get backlog items
-  4. taskMove → move top 10 tasks to new sprint
-  5. taskPutAssignees → assign engineering team members
-
-Result: Sprint ready to go, fully populated and assigned.
-```
-</details>
-
-<details>
-<summary><b>Recipe 4: Competitive Intelligence Agent</b></summary>
-<br>
-
-**Problem:** You need an agent that monitors competitors and reports findings.
-
-```
-You: "Generate an AI agent that researches our top 5 competitors.
-      Train it on our Competitive Analysis project.
-      Name it 'Market Intel Agent'."
-
-Claude uses:
-  1. folderAgentGenerate → generate agent from research prompt
-  2. agentKnowledgeProjectCreate → connect Competitive Analysis project
-  3. agentUpdate → refine instructions for research cadence
-
-Result: AI research agent with domain knowledge, ready for briefings.
-```
-</details>
-
-<details>
-<summary><b>Recipe 5: Client Onboarding Pipeline</b></summary>
-<br>
-
-**Problem:** Each new client needs the same project structure, tasks, and materials.
-
-```
-You: "For our new client Acme Corp: create a project from
-      the 'Client Onboarding' template, add tasks for
-      kickoff meeting and SOW review, set due dates for
-      the next 2 weeks, then share the project link."
-
-Claude uses:
-  1. projectFromTemplate → create "Acme Corp Onboarding"
-  2. taskCreate → add kickoff, requirements, SOW tasks
-  3. taskPutDate → set dates across next 2 weeks
-  4. projectShareLinkEnable → generate share link
-
-Result: Client onboarding project live and shareable in 30 seconds.
-```
-</details>
-
----
-
-## Use Cases
-
-### Project Management with AI
-
-Ask your AI assistant to manage your Taskade workspace:
-
-- "Show me all my projects and their status"
-- "Create a new project called Q1 Planning with tasks for each team"
-- "Move all overdue tasks to the Backlog project"
-- "Set due dates for all tasks in the Sprint project"
-
-### AI Agent Creation
-
-Build and deploy AI agents directly from your editor:
-
-- "Create an AI agent called Customer Support Bot with knowledge from our docs project"
-- "Generate an agent for code review using this prompt: ..."
-- "Publish my agent publicly and give me the share link"
-- "Add our API documentation project as knowledge to the agent"
-
-### Template Workflows
-
-Automate project creation from templates:
-
-- "List all templates in my workspace"
-- "Create 5 new client onboarding projects from the Client Template"
-- "Copy the Sprint Retrospective project for this week"
-
-### n8n Automation Integration
-
-Connect Taskade to 400+ apps via n8n workflows. See the [n8n Integration Guide](./N8N_WORKFLOW_GUIDE.md) for setup instructions.
-
----
-
-## OpenAPI Codegen
-
-Use our generator to build MCP tools from any OpenAPI spec — not just Taskade.
-
-```bash
-npm install --save-dev @taskade/mcp-openapi-codegen @readme/openapi-parser
-```
-
-```ts
-import { dereference } from '@readme/openapi-parser';
-import { codegen } from '@taskade/mcp-openapi-codegen';
-
-const document = await dereference('your-api-spec.yaml');
-
-await codegen({
-  path: 'src/tools.generated.ts',
-  document,
-});
-```
-
-Works with any OpenAPI 3.0+ spec. Generate MCP tools for your own APIs in minutes.
-
----
-
-## What is Taskade?
-
-[Taskade](https://www.taskade.com) ([Y Combinator S19](https://www.ycombinator.com/companies/taskade)) is the AI-native workspace for building apps, deploying agents, and automating workflows — from a single prompt. **150,000+ apps generated. Trusted by 3M, Nike, Tesla, Netflix, Airbnb, Disney, Adobe.** Rated 4.8/5 across 9,300+ reviews.
-
-- **Genesis Apps** — Build complete apps from prompts. Dashboards, CRMs, portals, forms — deployed instantly. [Try it →](https://www.taskade.com/create)
-- **AI Agents** — Custom agents with 22+ tools, persistent memory, multi-agent teams, public embedding
-- **Automations** — No-code workflow automation with 100+ integrations, branching, looping, filtering
-- **Real-time Collaboration** — Multiplayer workspace with chat, video, 7 project views
-- **Templates** — 700+ templates for project management, engineering, marketing, and more
-- **API & MCP** — REST API v2, this MCP Server, Agent API, webhooks, OAuth 2.0
-
-**Links:**
-- App: [taskade.com](https://www.taskade.com)
-- Create: [taskade.com/create](https://www.taskade.com/create)
-- Agents: [taskade.com/agents](https://www.taskade.com/agents)
-- Templates: [taskade.com/templates](https://www.taskade.com/templates)
-- Community: [taskade.com/community](https://www.taskade.com/community)
-- Developer Docs: [developers.taskade.com](https://developers.taskade.com)
-- Blog: [taskade.com/blog](https://www.taskade.com/blog)
-
----
-
-## Roadmap
-
-See [open issues](https://github.com/taskade/mcp/issues) for planned features and improvements.
-
-- **Hosted MCP Endpoint** — `mcp.taskade.com` for zero-install MCP access ([#6](https://github.com/taskade/mcp/issues/6))
-- **Automation & Flow Tools** — Create, enable, and manage workflow automations via MCP
-- **Agent Chat via MCP** — Send messages to AI agents and receive responses
-- **Webhook Triggers** — Receive real-time notifications from Taskade events
-- **`agent.js`** — Open-source autonomous agent toolkit (coming soon)
-- **TaskOS** — Agent platform at [developers.taskade.com](https://developers.taskade.com)
-
----
-
-## Contributing
-
-Help us improve MCP tools, OpenAPI workflows, and agent capabilities.
-
-- [Issues](https://github.com/taskade/mcp/issues) — Report bugs or request features
-- [Pull Requests](https://github.com/taskade/mcp/pulls) — Contributions welcome
-- [Community](https://www.taskade.com/community) — Join the Taskade community
-- [Contact](mailto:hello@taskade.com) — hello@taskade.com
-
----
-
-## License
-
-MIT
+#### 👩🏻‍💻 Developer Productivity
+
+| Server name | Description | Usage |
+|---|---|---|
+| [Carbon MCP](https://github.com/carbon-design-system/carbon-mcp) | Provides tools to explore Carbon Design System components, tokens, and icons, answer documentation questions, and generate consistent UI code. | *Cloud server access [instructions.](https://carbondesignsystem.com/developing/carbon-mcp/overview/)* |
+| [IBM Developer for z/OS on VS Code MCP Server](https://www.ibm.com/docs/en/developer-for-zos/17.0.x?topic=overview-agent-mode) | MCP server that runs as part of IBM's z/OS enterprise application development editor for COBOL, PL/I, REXX, JCL, and Assembler. Enable your AI Chat in VS Code with access to your local workspace as well as your remote z/OS development environment. Interact with z/OS retrieving or updating data sets, submitting jobs and fetching job info and spool files, retrieving files from your z/OS UNIX home directory and open it in the editor, building you application and analyzing problems with guidance for how to fix them, and much more. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:extension/IBM.zopeneditor) |
+
+#### 🏗️ Infrastructure & Deployment
+
+| Server name | Description | Usage |
+|---|---|---|
+| [IBM Cloud MCP Server](https://ibm-cloud.github.io/mcp/) | Enhance your LLM with tools from IBM Cloud. | *see link for instructions* |
+| [Terraform IBM Modules (TIM) MCP Server](https://github.com/terraform-ibm-modules/tim-mcp) | The TIM-MCP server provides structured access to the Terraform IBM Modules(TIM) ecosystem, enabling intelligent provisioning of IBM Cloud infrastructure resources as code. | *see link for instructions* |
+| [IBM Cloud Code Engine MCP Server](https://github.com/greyhoundforty/code-engine-mcp) | This MCP server provides tools to list and inspect Code Engine projects, applications, revisions, domain mappings, and secrets. | *see link for instructions* |
+| [IBM Cloud VPC MCP Server](https://github.com/greyhoundforty/ibmcloud-vpc-mcp) | Provides access to IBM Cloud VPC resources and security analysis capabilities, enabling AI agents to interact with cloud infrastructure, backups, and security policies. | *see link for instructions* |
+| [IBM i MCP Server](https://github.com/IBM/ibmi-mcp-server) | MCP server for IBM i systems that enables AI agents to interact securely with IBM i through SQL-based tools. It provides a flexible framework for building custom agentic tools for tasks such as performance monitoring, security auditing, storage analysis, database administration and more. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22ibmi-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40ibm%2Fibmi-mcp-server%40latest%22%5D%7D) |
+| [IBM Power Virtual Server MCP Server](https://github.com/IBM/powervs-mcp-server) | Brings to AI-Agents seamless observability and diagnosis of their virtual machines registered with IBM Power Virtual Server  | *see link for instructions* |
+| [Terraform MCP Server](https://github.com/hashicorp/terraform-mcp-server) | Provides seamless integration with Terraform ecosystem, enabling advanced automation and interaction capabilities for Infrastructure as Code (IaC) development. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22terraform-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22hashicorp%2Fterraform-mcp-server%22%5D%7D) |
+
+#### 📊 Observability & Monitoring
+
+| Server name | Description | Usage |
+|---|---|---|
+| [IBM Instana MCP Server](https://github.com/instana/mcp-instana) | This MCP server provides tools to list and inspect IBM Instana resources, including applications, infrastructure resources etc. | *see link for instructions* |
+| [IBM Storage Insights MCP Server](https://github.com/IBM/ibm-storageinsights-mcpserver) | Leverage key IBM Storage Insights monitoring capabilities via an MCP interface. | *see link for instructions* |
+
+#### 📡 Networking
+
+| Server name | Description | Usage |
+|---|---|---|
+| [Consul MCP Server](https://hub.docker.com/r/hashicorp/consul-mcp-server) |This MCP server acts as a bridge, giving AI models the ability to execute Consul operations via APIs. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](vscode:mcp/install?%7B%22name%22%3A%22consul%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22-e%22%2C%22CONSUL_HTTP_ADDR%3Dhttp%3A%2F%2Fhost.docker.internal%3A8500%22%2C%22-e%22%2C%22CONSUL_HTTP_TOKEN%3D%24%7BCONSUL_DC1_TOKEN%7D%22%2C%22hashicorp%2Fconsul-mcp-server%22%5D%7D) |
+
+#### 🔬 Research
+
+| Server name                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                | Usage |
+|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
+| [MAMMAL-MCP](https://github.com/BiomedSciAI/biomed-multi-alignment/tree/main/mammal_mcp) | MAMMAL (ibm/biomed.omics.bl.sm.ma-ted-458m) is a 'biomedical foundation model' (BMFM) that has been trained by IBM and the details can be found here -> https://github.com/BiomedSciAI/biomed-multi-alignment. This MCP server can be used to enable AI Agent systems to use some of the MAMMAL model tasks, such as: 'Protein-Protein interaction prediction', 'Protein solubility prediction' and 'Drug-Protein interaction prediction'. | *see link for instructions* |
+
+
+#### 🔐 Security
+
+| Server name | Description | Usage |
+|---|---|---|
+| [Guardium Data Protection MCP Server](https://github.com/IBM/gdp-mcp-server) | Access 621 IBM Guardium Data Protection REST API endpoints through 4 intelligent MCP tools — search APIs, list categories, get API details, and execute any GDP endpoint. | *[see link for instructions](https://github.com/IBM/gdp-mcp-server)* |
+| [QRadar SIEM MCP Server](https://github.com/IBM/qradar-mcp-server) | Access 728+ IBM QRadar REST API endpoints through 4 intelligent MCP tools — search offenses, run AQL queries, manage reference sets, and investigate security incidents. | *[see link for instructions](https://github.com/IBM/qradar-mcp-server)* |
+| [Guardium Cryptography Manager MCP Server](https://github.com/IBM/gcm-mcp-server) | Access 292 IBM Guardium Cryptography Manager API endpoints through 3 intelligent MCP tools — manage encryption keys, run discovery scans, enforce crypto policies, and monitor compliance. | *[see link for instructions](https://github.com/IBM/gcm-mcp-server)* |
+| [IBM Security Verify MCP Server](https://github.com/IBM/verify-mcp-server) | Access 210 IBM Security Verify REST API endpoints through 4 intelligent MCP tools — discover APIs, manage users, configure SSO, and orchestrate identity workflows. | *[see link for instructions](https://github.com/IBM/verify-mcp-server)* |
+| [Vault MCP Server](https://developer.hashicorp.com/hcp/docs/vault-radar/mcp-server/overview) |This MCP server acts as a bridge, giving AI models the ability to execute kv, pki, and mount operations in Vault via APIs. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](vscode:mcp/install?%7B%22name%22%3A%22vault-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22--rm%22%2C%22-i%22%2C%22-e%22%2C%22VAULT_ADDR%3D%3CVault%20Address%3E%22%2C%22-e%22%2C%22VAULT_TOKEN%3D%3CVault%20Token%3E%22%2C%22-e%22%2C%22VAULT_NAMESPACE%3D%3CVault%20Namespace%3E%22%2C%22hashicorp%2Fvault-mcp-server%22%5D%7D) |
+| [Vault Radar MCP Server](https://developer.hashicorp.com/hcp/docs/vault-radar/mcp-server/overview) |Provides access to HCP Vault Radar data sources, secret risks, and events, enabling LLMs to query and analyze security information using natural language. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=plastic&logo=visualstudiocode&logoColor=ffffff)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22name%22%3A%22vault-radar%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22--rm%22%2C%22-i%22%2C%22-e%22%2C%22HCP_PROJECT_ID%3D%3CHCP%20Project%20ID%3E%22%2C%22-e%22%2C%22HCP_CLIENT_ID%3D%3CHCP%20Service%20Principal%20Client%20ID%3E%22%2C%22-e%22%2C%22HCP_CLIENT_SECRET%3D%3CHCP%20Service%20Principal%20Client%20Secret%3E%22%2C%22hashicorp%2Fvault-radar-mcp-server%3A%3Ctag%3E%22%5D%7D) |
+
+
+#### 🛠️ Developer Tools
+
+- [BeeAI Framework](https://framework.beeai.dev/integrations/mcp) - BeeAI Framework is an open-source framework for building production-grade multi-agent systems, supporting both Python and TypeScript. It integrates with the Model Context Protocol (MCP) as a MCP client, and is hosted by the Linux Foundation under open governance.
+- [ContextForge MCP Gateway](https://github.com/IBM/mcp-context-forge) - MCP server, feature-rich gateway, and proxy that federates MCP and REST services-delivering unified discovery, authentication, rate-limiting, observability, multi-transport protocols, and an optional HTMX-powered admin UI through a single endpoint.
+- [IBM API Connect for GraphQL](https://www.ibm.com/docs/en/api-connect-graphql/saas?topic=directives-directive-tool) - Turn any GraphQL schema into a MCP server incl. authentication.
+- [Langflow](https://github.com/langflow-ai/langflow) - Langflow is an open-source visual builder that lets developers rapidly prototype and build AI applications, it integrates with the Model Context Protocol (MCP) as both an MCP server and an MCP client.
+- [MCP Composer](https://pypi.org/project/mcp-composer/) - FastMCP based library to manages multiple MCP servers & tools with dynamic registration, authentication, and unified interface.. Supports multiple tool types, such as OpenAPI (REST), GraphQL, CLI-based tools, client SDKs, and nested MCP servers.
+- [WxMCPServer](https://github.com/IBM/WxMCPServer) - IBM webMethods Hybrid Integration (IWHI) based MCP server, that enables existing APIs to be used as MCP tools.
+- [z/OS Connect](https://www.ibm.com/docs/en/zos-connect/3.0.0?topic=connect-what-is-mcp) - z/OS Connect based MCP server, that enables existing APIs to be used as MCP tools.
+- [IBM API Connect MCP Server](https://github.com/ibm-apiconnect/apic-mcp-server) - IBM APIC MCP server exposes API Connect capabilities to your MCP clients and AI Agent workflows.
+
+## MCP Clients
+
+We recommend using [Langflow](https://github.com/langflow-ai/langflow) or your IDE of choice as MCP client.
+
+## 💬 Community
+
+Participate in the [Discord community](https://discord.com/invite/NzCQQWm7Xs).
+
+## 🤝 Contributing
+
+Everyone is invited to contribute to this repository, see [CONTRIBUTING.md](./CONTRIBUTING.md) for information.
+
+Thanks to all of our amazing contributors!
+
+<a href="https://github.com/ibm/mcp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ibm/mcp" />
+</a>
+
+## ⭐ Support
+
+If you find these IBM MCP servers useful please consider starring the repository and contributing new servers, examples or improvements!
+
+## FAQ
+
+### General
+
+**What is MCP?**
+MCP (Model Context Protocol) is an open protocol that standardizes how AI applications connect to external data sources and tools. It provides a universal interface for AI models to interact with APIs, databases, and services.
+
+**Why use IBM MCP Servers?**
+IBM MCP Servers provide production-ready, enterprise-grade MCP server implementations for IBM services including Cloud Object Storage, Watson Discovery, and more. They follow security best practices and include proper input validation.
+
+### Getting Started
+
+**How do I install an MCP server?**
+Each MCP server in this collection has its own installation instructions. Most can be installed via npm, uvx, or Docker. See the individual server README for details.
+
+**Which MCP clients are compatible?**
+Any client that supports the MCP protocol works with these servers. Supported clients include VS Code (with MCP extension), Claude Desktop, Cursor, and other MCP-compatible AI applications.
+
+**Do I need IBM Cloud credentials?**
+It depends on the server. Servers that connect to IBM Cloud services (like Cloud Object Storage) require IBM Cloud credentials. Local servers may not need any credentials.
+
+### Configuration
+
+**How do I configure MCP servers in my client?**
+Add the server configuration to your client's `mcp.json` file. Each server README includes the exact configuration snippet. For VS Code, you can use the one-click install button if available.
+
+**How do I manage API keys and credentials?**
+Store credentials as environment variables or in a `.env` file. Never commit credentials to version control. Each server README specifies the required environment variables.
+
+**Can I run multiple MCP servers simultaneously?**
+Yes. Each MCP server runs as a separate process. Configure each server in your client's MCP configuration file with unique names.
+
+### Troubleshooting
+
+**Why is my MCP server not connecting?**
+Check that:
+1. All required environment variables are set
+2. The server process is running
+3. Your MCP client is configured with the correct server path
+4. Network connectivity to the target service is available
+
+**How do I debug MCP server issues?**
+Enable debug logging in your MCP client. Check the server logs for error messages. Verify your credentials and network connectivity.
+
+**Where can I get help?**
+- **GitHub Issues**: [Report bugs or request features](https://github.com/IBM/mcp/issues)
+- **Discord**: [Join the MCP community](https://discord.com/invite/TMNc2tXbNc)
+- **Documentation**: See individual server READMEs for detailed setup guides
